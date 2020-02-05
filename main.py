@@ -5,6 +5,7 @@ width = 10
 height = 10
 max_generations = 5
 
+
 def generationCalculation(rows, cols, grid):
     nextGenGrid = grid.getBuffer()
     
@@ -50,6 +51,7 @@ def generationCalculation(rows, cols, grid):
                 break
             elif(j == cols-1 and i != 0 and i != rows-1):
                 break
+                
             #8 neighbors
             elif(i != 0 and j != 0 and i != rows-1 and j != cols-1):
                 if(grid.buffer[i+1][j] == 1):
@@ -70,8 +72,7 @@ def generationCalculation(rows, cols, grid):
                 if(grid.buffer[i-1][j-1] == 1):
                     liveNeighbors += 1
 
-
-
+        #check number of neighbors            
         if(grid.buffer[i][j] == 1 and liveNeighbors < 2):
             nextGenGrid[i][j] = 0
         
