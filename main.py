@@ -1,64 +1,100 @@
-import game
+
+from game import Grid
 
 width = 10
 height = 10
 max_generations = 5
 
-grid = game.Grid(width, height, max_generations)
-
-
-def generationCalculation(rows, cols):
-    liveNeighbors = 0
-    nextGenGrid = grid.buffer
+def generationCalculation(rows, cols, grid):
+    nextGenGrid = grid.getBuffer()
     
-    for i in range(cols):
+    for i in range(rows):
 
-        for j in range(rows):
+        for j in range(cols):
+            liveNeighbors = 0
 
-            
-            if(grid.buffer[i+1][j] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i-1][j] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i][j+1] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i][j-1] == 1):
-                liveNeighbors += 1
-            #diagonals
-            if(grid.buffer[i+1][j+1] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i-1][j-1] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i-1][j+1] == 1):
-                liveNeighbors += 1
-            if(grid.buffer[i-1][j-1] == 1):
-                liveNeighbors += 1
+            #edges
+            if(i == 0 and j == 0):
+                if(grid.buffer[i+1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j+1] == 1):
+                    liveNeighbors += 1 
+                if(grid.buffer[i+1][j+1] == 1):
+                    liveNeighbors += 1
+            elif(i == 0 and j == cols-1):
+                if(grid.buffer[i+1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j-1] == 1):
+                    liveNeighbors += 1 
+                if(grid.buffer[i+1][j-1] == 1):
+                    liveNeighbors += 1
+            elif(i == rows-1 and j == 0):
+                if(grid.buffer[i-1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j+1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j+1] == 1):
+                    liveNeighbors += 1
+            elif(i == rows-1 and j == cols-1):
+                if(grid.buffer[i-1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j-1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j-1] == 1):
+                    liveNeighbors += 1
+            elif(i == 0 and j != 0 and j != cols-1):
+                break
+            elif(i == rows-1 and j != 0 and j != cols-1):
+                break
+            elif(j == 0 and i != 0 and i != rows-1):
+                break
+            elif(j == cols-1 and i != 0 and i != rows-1):
+                break
+            #8 neighbors
+            elif(i != 0 and j != 0 and i != rows-1 and j != cols-1):
+                if(grid.buffer[i+1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j+1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i][j-1] == 1):
+                    liveNeighbors += 1
+                #diagonals
+                if(grid.buffer[i+1][j+1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j-1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j+1] == 1):
+                    liveNeighbors += 1
+                if(grid.buffer[i-1][j-1] == 1):
+                    liveNeighbors += 1
 
-        liveNeighbors -= grid[i][j]
 
-        if((grid.buffer[i][j]) == 1) and (liveNeighbors < 2):
+
+        if(grid.buffer[i][j] == 1 and liveNeighbors < 2):
             nextGenGrid[i][j] = 0
         
-        elif((grid.buffer[i][j] == 1) and (liveNeighbors > 3)):
+        elif(grid.buffer[i][j] == 1 and liveNeighbors > 3):
             nextGenGrid[i][j] = 0
 
-        elif((grid.buffer[i][j] == 1) and (liveNeighbors == 3)):
+        elif(grid.buffer[i][j] == 0 and liveNeighbors == 3):
             nextGenGrid[i][j] = 1
 
         else:
             nextGenGrid[i][j] = grid.buffer[i][j]
 
-        return nextGenGrid
+    return nextGenGrid
 
 
 def main():
     
-    grid = game.Grid(width, height, max_generations)
+    grid = Grid(width, height, max_generations)
     # -----------------------------------------------------------------------------
     # main loop
-    while grid.generations < max_generations:
+    while grid.getGenerations() < max_generations:
         grid.display()
-        grid.generations += 1
-        grid = generationCalculation(width, height)
+        grid.setGenerations()
+        grid = generationCalculation(width, height, grid)
 
 main()

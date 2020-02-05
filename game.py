@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-
+import random
 
 # grid class to store cells
 class Grid:
@@ -12,6 +12,23 @@ class Grid:
         self.max_generations = max_generations
         self.generations = 0
 
+    def getBuffer(self):
+        return self.buffer
+
+    def setBuffer(self, grid):
+        self.buffer = grid
+
+    def getWidth(self):
+        return self.width
+
+    def getHeight(self):
+        return self.height
+
+    def getGenerations(self):
+        return self.generations
+
+    def setGenerations(self):
+        self.generations += 1
 
 
     def set_cell(self, x, y, state):
@@ -31,7 +48,15 @@ class Grid:
 
         time.sleep(1)
 
+def getNum():
+    return random.randint(0,1)
 
 def build_grid(width, height):
-    grid = [x[:] for x in [[1] * width] * height]
+    grid = []
+
+    for row in range(height):
+        grid.append([])
+        for column in range(width):
+            grid[row].append(random.randint(0,1))
+    
     return grid
