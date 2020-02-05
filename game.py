@@ -2,6 +2,8 @@ import os
 import sys
 import time
 
+import random 
+
 
 # grid class to store cells
 class Grid:
@@ -33,5 +35,11 @@ class Grid:
 
 
 def build_grid(width, height):
-    grid = [x[:] for x in [[1] * width] * height]
-    return grid
+    grid = []
+
+    for row in range(height):
+        grid.append([])
+        for column in range(width):
+            grid[row].append(random.randint(0,1))
+
+    return grid 
