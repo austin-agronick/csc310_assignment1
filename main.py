@@ -8,12 +8,13 @@ grid = game.Grid(width, height, max_generations)
 
 
 def generationCalculation(rows, cols):
-    liveNeighbors = 0
     nextGenGrid = grid.buffer
     
     for i in range(cols):
 
         for j in range(rows):
+
+            liveNeighbors = 0
 
             
             if(grid.buffer[i+1][j] == 1):
@@ -34,7 +35,6 @@ def generationCalculation(rows, cols):
             if(grid.buffer[i-1][j-1] == 1):
                 liveNeighbors += 1
 
-        liveNeighbors -= grid[i][j]
 
         if((grid.buffer[i][j]) == 1) and (liveNeighbors < 2):
             nextGenGrid[i][j] = 0
