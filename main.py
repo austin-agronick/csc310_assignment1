@@ -13,41 +13,41 @@ def generationCalculation(grid, rows, cols):
 
         for j in range(rows):
 
-            if(i+1 < cols):
+            if(i+1 <= cols-1):
                 if(grid.buffer[i+1][j] == 1):
                     liveNeighbors += 1
-            if(i-1 > 0):
+            if(i-1 >= 0):
                 if(grid.buffer[i-1][j] == 1):
                     liveNeighbors += 1
-            if(j+1 < rows):
+            if(j+1 <= rows-1):
                 if(grid.buffer[i][j+1] == 1):
                     liveNeighbors += 1
-            if(j-1 > 0):
+            if(j-1 >= 0):
                 if(grid.buffer[i][j-1] == 1):
                     liveNeighbors += 1
                 #diagonals
-            if(i+1 < cols and j+1 < rows):
+            if(i+1 <= cols-1 and j+1 <= rows-1):
                 if(grid.buffer[i+1][j+1] == 1):
                     liveNeighbors += 1
-            if(i-1 > 0 and j-1 > 0):
+            if(i-1 >= 0 and j-1 >= 0):
                 if(grid.buffer[i-1][j-1] == 1):
                     liveNeighbors += 1
-            if(i-1 > 0 and j+1 < rows):
+            if(i-1 >= 0 and j+1 <= rows-1):
                 if(grid.buffer[i-1][j+1] == 1):
                     liveNeighbors += 1
-            if(i+1 < rows and j-1 > 0):
+            if(i+1 <= cols-1 and j-1 >= 0):
                 if(grid.buffer[i+1][j-1] == 1):
                     liveNeighbors += 1
 
         liveNeighbors -= grid.buffer[i][j]
 
-        if((grid.buffer[i][j]) == 1) and (liveNeighbors < 2):
+        if grid.buffer[i][j] == 1 and liveNeighbors < 2:
             nextGenGrid[i][j] = 0
         
-        elif((grid.buffer[i][j] == 1) and (liveNeighbors > 3)):
+        elif grid.buffer[i][j] == 1 and liveNeighbors > 3:
             nextGenGrid[i][j] = 0
 
-        elif((grid.buffer[i][j] == 1) and (liveNeighbors == 3)):
+        elif grid.buffer[i][j] == 1 and liveNeighbors == 3:
             nextGenGrid[i][j] = 1
 
         else:
