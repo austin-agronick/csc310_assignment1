@@ -10,6 +10,7 @@ def generationCalculation(grid, rows, cols):
 
     nextGenGrid = grid
 
+
     for i in range(cols):
 
         for j in range(rows):
@@ -65,6 +66,8 @@ def main():
     while grid.generations < max_generations:
         grid.display()
         grid.generations += 1
+
         grid.buffer = generationCalculation(grid.buffer, width, height)
+
 
 main()
