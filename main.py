@@ -16,7 +16,7 @@ def generationCalculation(rows, cols):
 
             liveNeighbors = 0
 
-            
+            #fix this so it doesn't go out of bounds
             if(grid.buffer[i+1][j] == 1):
                 liveNeighbors += 1
             if(grid.buffer[i-1][j] == 1):
@@ -59,6 +59,6 @@ def main():
     while grid.generations < max_generations:
         grid.display()
         grid.generations += 1
-        grid = generationCalculation(width, height)
+        grid.buffer = generationCalculation(width, height)
 
 main()
