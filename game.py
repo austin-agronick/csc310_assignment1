@@ -8,7 +8,7 @@ import random
 # grid class to store cells
 class Grid:
     def __init__(self, width, height, max_generations):
-        self.buffer = build_grid(width, height)
+        self.buffer = self.data = build_grid(width, height)
         self.width = width
         self.height = height
         self.max_generations = max_generations
@@ -20,6 +20,7 @@ class Grid:
         pass
 
     def display(self):
+        self.buffer = self.data
         # clear the screen, display the contents of a grid, wait for 1sec
         os.system('clear') # outputs 'TERM environment variable not set.' error if executed in python console
 
@@ -40,6 +41,6 @@ def build_grid(width, height):
     for row in range(height):
         grid.append([])
         for column in range(width):
-            grid[row].append(random.randint(0,1))
+            grid[row].append(random.randint(0, 1))
 
-    return grid 
+    return grid
