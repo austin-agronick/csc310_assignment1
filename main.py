@@ -1,8 +1,5 @@
 import game
-
-width = 10
-height = 10
-max_generations = 10
+import sys
 
 
 def generationCalculation(grid, rows, cols):
@@ -46,6 +43,11 @@ def generationCalculation(grid, rows, cols):
 
 
 def main():
+
+    width = int(sys.argv[1])
+    height = int(sys.argv[2])
+    max_generations = int(sys.argv[3])
+
     grid = game.Grid(width, height, max_generations)
 
     # -----------------------------------------------------------------------------
@@ -56,5 +58,5 @@ def main():
 
         grid.data = generationCalculation(grid.data, width, height)
 
-
-main()
+if __name__ == "__main__":
+    main()
